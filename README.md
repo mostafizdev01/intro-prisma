@@ -154,10 +154,6 @@ This guide follows the **exact order of Prisma queries** used in the `hello-pris
 ## 🤝 Contributing  
 Pull requests are welcome! Feel free to fork this repo and add more Prisma examples.  
 
----
-
-## 📜 License  
-This project is **MIT Licensed**.  
 
 ---
 
