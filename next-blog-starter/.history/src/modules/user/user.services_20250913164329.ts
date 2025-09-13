@@ -78,6 +78,5 @@ export const UserServices = {
     CreateUser,
     getAllFromDB,
     getDataById,
-    updateDataById,
-    deleteDataById
+    updateDataById
 }

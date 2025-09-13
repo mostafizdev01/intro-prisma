@@ -52,25 +52,9 @@ const updateUserById = async (req: Request, res: Response) => {
     const body = req.body;
     try {
         const data = await UserServices.updateDataById(id, body)
-        res.status(201).json({
-            status: "Success",
-            message: "✅ User Update Successfull.",
-            data: data
-        })
-    } catch (error) {
-        console.log(error);
-
-    }
-}
-
-// update user by id 
-const deleteUserById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    try {
-        const data = await UserServices.deleteDataById(id)
         res.status(200).json({
             status: "Success",
-            message: "✅ User Delete Successfull.",
+            message: "✅User Update Successfull.",
             data: data
         })
     } catch (error) {
@@ -83,7 +67,5 @@ const deleteUserById = async (req: Request, res: Response) => {
 export const UserControllers = {
     CreateUser,
     getAllFromDB,
-    getUserById,
-    updateUserById,
-    deleteUserById
+    getUserById
 }

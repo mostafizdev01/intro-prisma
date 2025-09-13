@@ -55,7 +55,7 @@ const getDataById = async (id:number) => {
 
 /// Update single user data
 const updateDataById = async (id:number, payload:Partial<User>) => {
-    const result = await prisma.user.update({
+    const result = await prisma.user.findUnique({
         where: {
             id
         },
@@ -64,20 +64,8 @@ const updateDataById = async (id:number, payload:Partial<User>) => {
     return result;
 }
 
-/// Delete single user data
-const deleteDataById = async (id:number) => {
-    const result = await prisma.user.delete({
-        where: {
-            id
-        }
-    })
-    return result;
-}
-
 export const UserServices = {
     CreateUser,
     getAllFromDB,
-    getDataById,
-    updateDataById,
-    deleteDataById
+    getDataById
 }

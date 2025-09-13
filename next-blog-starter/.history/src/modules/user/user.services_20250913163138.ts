@@ -55,20 +55,21 @@ const getDataById = async (id:number) => {
 
 /// Update single user data
 const updateDataById = async (id:number, payload:Partial<User>) => {
-    const result = await prisma.user.update({
+    const result = await prisma.user.findUnique({
         where: {
             id
         },
-        data: payload
-    })
-    return result;
-}
-
-/// Delete single user data
-const deleteDataById = async (id:number) => {
-    const result = await prisma.user.delete({
-        where: {
-            id
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            picture: true,
+            createdAt: true,
+            updatedAt: true,
+            role: true,
+            status: true,
+            posts: true
         }
     })
     return result;
@@ -77,7 +78,5 @@ const deleteDataById = async (id:number) => {
 export const UserServices = {
     CreateUser,
     getAllFromDB,
-    getDataById,
-    updateDataById,
-    deleteDataById
+    getDataById
 }

@@ -8,7 +8,6 @@ router.get("/", UserControllers.getAllFromDB)
 router.post("/", UserControllers.CreateUser)
 router.get("/:id", UserControllers.getUserById)
 router.patch("/:id", UserControllers.updateUserById)
-router.delete("/:id", UserControllers.deleteUserById)
 
 
 export const UserRoute = router;

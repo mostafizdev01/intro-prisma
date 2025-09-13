@@ -84,6 +84,5 @@ export const UserControllers = {
     CreateUser,
     getAllFromDB,
     getUserById,
-    updateUserById,
-    deleteUserById
+    updateUserById
 }

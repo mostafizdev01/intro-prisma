@@ -68,9 +68,9 @@ const deleteUserById = async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     try {
         const data = await UserServices.deleteDataById(id)
-        res.status(200).json({
+        res.status(201).json({
             status: "Success",
-            message: "✅ User Delete Successfull.",
+            message: "✅ User Update Successfull.",
             data: data
         })
     } catch (error) {
@@ -84,6 +84,5 @@ export const UserControllers = {
     CreateUser,
     getAllFromDB,
     getUserById,
-    updateUserById,
-    deleteUserById
+    updateUserById
 }
