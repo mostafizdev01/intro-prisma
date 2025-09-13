@@ -10,17 +10,13 @@ let server: Server | null = null;
 async function connectToDB(){
   try {
     await prisma.$connect()
-    console.log("✅ DB connected successfull");
-    
   } catch (error) {
-    console.log("DB connection failed");
-    process.exit(1)     // server ta close kortesi. 1 => dhara off korar signal dei
+    
   }
 }
 
 async function startServer() {
   try {
-    await connectToDB()
     server = http.createServer(app);
     server.listen(process.env.PORT, () => {
       console.log(`🚀 Server is running on port is ${process.env.PORT}`);
