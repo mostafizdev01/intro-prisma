@@ -25,7 +25,7 @@ model User {
   isVerified Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  posts Post[] // One to many reletions created. 1ta user onek gula post korte parbe and sei info gula ei arrary er mordhe thakbe
+  posts Post[]
 }
 
 // create post model 
