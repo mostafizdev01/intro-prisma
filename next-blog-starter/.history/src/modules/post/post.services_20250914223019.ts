@@ -39,6 +39,8 @@ const GetSinglePost = async (id: number) => {
 
 // upate post by id
 const UpdatePostById = async (id:number, payload:Partial<Post>) => {
+   console.log(id);
+   
    const result = await prisma.post.update({
       where: {
          id

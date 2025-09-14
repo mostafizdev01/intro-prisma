@@ -16,11 +16,7 @@ const CreatePost = async (req: Request, res: Response) => {
 const GetAllPost = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.GetAllPost()
-         res.status(200).json({
-            success: true,
-            message: "Post ReadWrite successfull",
-            data: result
-        })
+        res.status(200).json({ result })
     } catch (error) {
         console.log(error)
         res.send(error)
@@ -31,11 +27,7 @@ const GetAllPost = async (req: Request, res: Response) => {
 const GetPostById = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.GetSinglePost(Number(req.params.id))
-         res.status(200).json({
-            success: true,
-            message: "Your Post ReadWrite successfull",
-            data: result
-        })
+        res.status(201).json({ result })
     } catch (error) {
         console.log(error)
         res.send(error)
@@ -44,13 +36,13 @@ const GetPostById = async (req: Request, res: Response) => {
 
 // get update by id
 const UpdatePostById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
+    const id = req.body.params;
     const body = req.body;
     try {
         const result = await PostServices.UpdatePostById(id, body)
         res.status(200).json({
             success: true,
-            message: "Post update successfull",
+            message: "Post delete successfull",
             data: result
         })
     } catch (error) {
@@ -75,9 +67,5 @@ const DeletePostById = async (req: Request, res: Response) => {
 }
 
 export const PostControllers = {
-    CreatePost,
-    GetAllPost,
-    GetPostById,
-    UpdatePostById,
-    DeletePostById
+    CreatePost
 }

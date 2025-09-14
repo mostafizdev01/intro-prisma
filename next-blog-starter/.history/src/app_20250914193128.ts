@@ -2,7 +2,6 @@ import compression from "compression";
 import cors from "cors";
 import express from "express";
 import { UserRoute } from "./modules/user/user.routes";
-import { PostRoute } from "./modules/post/post.routes";
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.use(
 );
 
 app.use("/api/v1/user", UserRoute)
-app.use("/api/v1/post", PostRoute)
+app.use("/api/v1/post", UserRoute)
 
 // Default route for testing
 app.get("/", (_req, res) => {

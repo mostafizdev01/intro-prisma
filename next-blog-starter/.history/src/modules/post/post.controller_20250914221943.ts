@@ -5,10 +5,10 @@ import { PostServices } from "./post.services";
 const CreatePost = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.CreatePost(req.body)
-        res.status(201).json({ result })
+        res.status(201).json({result})
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error)
+      res.send(error)
     }
 }
 
@@ -16,14 +16,10 @@ const CreatePost = async (req: Request, res: Response) => {
 const GetAllPost = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.GetAllPost()
-         res.status(200).json({
-            success: true,
-            message: "Post ReadWrite successfull",
-            data: result
-        })
+        res.status(200).json({result})
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error)
+      res.send(error)
     }
 }
 
@@ -31,31 +27,23 @@ const GetAllPost = async (req: Request, res: Response) => {
 const GetPostById = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.GetSinglePost(Number(req.params.id))
-         res.status(200).json({
-            success: true,
-            message: "Your Post ReadWrite successfull",
-            data: result
-        })
+        res.status(201).json({result})
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error)
+      res.send(error)
     }
 }
 
 // get update by id
 const UpdatePostById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
+    const id = req.body.params;
     const body = req.body;
     try {
         const result = await PostServices.UpdatePostById(id, body)
-        res.status(200).json({
-            success: true,
-            message: "Post update successfull",
-            data: result
-        })
+        res.status(201).json({result})
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error)
+      res.send(error)
     }
 }
 
@@ -63,21 +51,16 @@ const UpdatePostById = async (req: Request, res: Response) => {
 const DeletePostById = async (req: Request, res: Response) => {
     try {
         const result = await PostServices.DeletePostById(Number(req.params.id))
-        res.status(200).json({
+        res.status(201).json({
             success: true,
-            message: "Post delete successfull",
-            data: result
+            message: "Post delete successfull"
         })
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error)
+      res.send(error)
     }
 }
 
 export const PostControllers = {
-    CreatePost,
-    GetAllPost,
-    GetPostById,
-    UpdatePostById,
-    DeletePostById
+    CreatePost
 }

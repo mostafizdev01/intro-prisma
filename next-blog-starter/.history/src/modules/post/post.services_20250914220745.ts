@@ -39,25 +39,14 @@ const GetSinglePost = async (id: number) => {
 
 // upate post by id
 const UpdatePostById = async (id:number, payload:Partial<Post>) => {
-   const result = await prisma.post.update({
-      where: {
-         id
-      }, 
-      data: payload
-   })
-
-   return result;
+   console.log("Create post is clicked..", payload);
    
 }
 
 //DeletePostById
-const DeletePostById = async (id: number) => {
-   const result = await prisma.post.delete({
-      where: {
-         id
-      }
-   })
-   return result;
+const DeletePostById = async (payload:any) => {
+   console.log("Create post is clicked..", payload);
+   
 }
 
 export const PostServices = {

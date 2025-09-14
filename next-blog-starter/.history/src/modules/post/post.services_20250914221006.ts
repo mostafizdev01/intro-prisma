@@ -57,7 +57,7 @@ const DeletePostById = async (id: number) => {
          id
       }
    })
-   return result;
+   
 }
 
 export const PostServices = {
