@@ -16,9 +16,8 @@ const CreatePost = async (req: Request, res: Response) => {
 const GetAllPost = async (req: Request, res: Response) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
-    const search = (req.query.search as string) || "";
     try {
-        const result = await PostServices.GetAllPost({page, limit, search})
+        const result = await PostServices.GetAllPost({page, limit})
         res.status(200).json({
             success: true,
             message: "Post ReadWrite successfull",
