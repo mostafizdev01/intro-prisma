@@ -82,7 +82,7 @@ const GetSinglePost = async (id: number) => {
       });
 
 
-      return await prisma.post.findUnique({
+      const result = await prisma.post.findUnique({
          where: {
             id
          },
@@ -92,6 +92,8 @@ const GetSinglePost = async (id: number) => {
       })
 
    })
+
+   return result
 
 }
 

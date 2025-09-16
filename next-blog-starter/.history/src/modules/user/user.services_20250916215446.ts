@@ -35,7 +35,7 @@ const getAllFromDB = async () => {
             posts: true
         },
         orderBy: {
-            id: "desc"
+            createdAt: "desc"
         }
     })
     return result;

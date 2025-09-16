@@ -4,13 +4,14 @@ import { prisma } from "../../config/db"
 
 const CreateUser = async (payload: Prisma.UserCreateInput): Promise<User> => {
     const {email} = payload
+    console.log(email)
     
     const isExistUser = await prisma.user.findUnique({
         where:{email}
     })
-    if(isExistUser){
-        throw new Error("User already exist")
-    }
+    // if(isExistUser){
+    //     throw new Error("User already exist")
+    // }
 
     const createUser = await prisma.user.create({
         data: payload
@@ -21,7 +22,6 @@ const CreateUser = async (payload: Prisma.UserCreateInput): Promise<User> => {
 /// get all user data
 const getAllFromDB = async () => {
     const result = await prisma.user.findMany({
-        // where:{id:6},
         select: {
             id: true,
             name: true,
@@ -35,7 +35,7 @@ const getAllFromDB = async () => {
             posts: true
         },
         orderBy: {
-            id: "desc"
+            createdAt: "desc"
         }
     })
     return result;
@@ -43,7 +43,6 @@ const getAllFromDB = async () => {
 
 /// get all user data
 const getDataById = async (id:number) => {
-    console.log(id)
     const result = await prisma.user.findUnique({
         where: {
             id
@@ -61,11 +60,6 @@ const getDataById = async (id:number) => {
             posts: true
         }
     })
-    
-    // if(!result){
-    //     throw new Error("User not found")
-    // }
-    
     return result;
 }
 

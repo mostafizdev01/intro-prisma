@@ -56,7 +56,7 @@ const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: num
       }
    })
 
-   const total = await prisma.post.count({ where })
+   const total = await prisma.post.count({where})
    return {
       pagination: {
          total,
@@ -64,7 +64,7 @@ const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: num
          limit,
          totalpage: Math.ceil(total / limit)
       },
-      data: result
+      data:result
    }
 }
 
@@ -73,25 +73,25 @@ const GetSinglePost = async (id: number) => {
 
    return await prisma.$transaction(async (tx) => {
       await tx.post.update({
-         where: { id },
+         where: {id},
          data: {
             views: {
-               increment: 1
+               increment : 1
             }
          }
-      });
-
-
-      return await prisma.post.findUnique({
-         where: {
-            id
-         },
-         include: {
-            author: true
-         }
       })
-
    })
+
+   const result = await prisma.post.findUnique({
+      where: {
+         id
+      },
+      include: {
+         author: true
+      }
+   })
+
+   return result
 
 }
 

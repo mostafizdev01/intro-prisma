@@ -21,7 +21,6 @@ const CreateUser = async (payload: Prisma.UserCreateInput): Promise<User> => {
 /// get all user data
 const getAllFromDB = async () => {
     const result = await prisma.user.findMany({
-        // where:{id:6},
         select: {
             id: true,
             name: true,
@@ -35,7 +34,7 @@ const getAllFromDB = async () => {
             posts: true
         },
         orderBy: {
-            id: "desc"
+            createdAt: "desc"
         }
     })
     return result;
@@ -61,11 +60,6 @@ const getDataById = async (id:number) => {
             posts: true
         }
     })
-    
-    // if(!result){
-    //     throw new Error("User not found")
-    // }
-    
     return result;
 }
 
