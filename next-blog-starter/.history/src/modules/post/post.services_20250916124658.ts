@@ -20,7 +20,7 @@ const CreatePost = async (payload: Prisma.PostCreateInput): Promise<Post> => {
 }
 
 //get All Post
-const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: number, limit: number, search: string, isFeatured?: boolean, tags?: string[] }) => {
+const GetAllPost = async ({ page, limit, search, isFeatured }: { page: number, limit: number, search: string, isFeatured?: boolean }) => {
    const skip = (page - 1) * limit;
    const where: any = {
       AND: [
@@ -31,17 +31,17 @@ const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: num
                },
                {
                   content: { contains: search, mode: 'insensitive' }
-               }
-            ]
-         },
-         typeof isFeatured === "boolean" && { isFeatured },
-         (tags && tags.length > 0) && { tags: { hasEvery: tags } }
-      ].filter(Boolean)
+               },
+               typeof isFeatured === "boolean" && {isFeatured},
+               (tags && tags.length > 0) && {tags: {hasEvery: tags}}
+            ].filter(Boolean)
+         }
+      ]
    };
    const result = await prisma.post.findMany({
       skip,
       take: limit,
-      where,
+
       include: {
          author: {
             select: {
@@ -50,9 +50,6 @@ const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: num
                phone: true
             }
          }
-      },
-      orderBy: {
-         createdAt: "desc"
       }
    })
    return result

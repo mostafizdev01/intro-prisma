@@ -22,6 +22,7 @@ const CreatePost = async (payload: Prisma.PostCreateInput): Promise<Post> => {
 //get All Post
 const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: number, limit: number, search: string, isFeatured?: boolean, tags?: string[] }) => {
    const skip = (page - 1) * limit;
+   console.log(isFeatured)
    const where: any = {
       AND: [
          search && {

@@ -20,28 +20,18 @@ const CreatePost = async (payload: Prisma.PostCreateInput): Promise<Post> => {
 }
 
 //get All Post
-const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: number, limit: number, search: string, isFeatured?: boolean, tags?: string[] }) => {
-   const skip = (page - 1) * limit;
-   const where: any = {
-      AND: [
-         search && {
-            OR: [
-               {
-                  title: { contains: search, mode: 'insensitive' }
-               },
-               {
-                  content: { contains: search, mode: 'insensitive' }
-               }
-            ]
-         },
-         typeof isFeatured === "boolean" && { isFeatured },
-         (tags && tags.length > 0) && { tags: { hasEvery: tags } }
-      ].filter(Boolean)
-   };
+const GetAllPost = async ({page, limit, search, isFeatured}:{page:number, limit: number, search: string, isFeatured?:boolean}) => {
+   const skip = (page -1) * limit;
    const result = await prisma.post.findMany({
       skip,
       take: limit,
-      where,
+      where: {
+         OR: [
+            {
+               title: {contains: search, mode: 'insensitive'}
+            }
+         ]
+      },
       include: {
          author: {
             select: {
@@ -50,12 +40,9 @@ const GetAllPost = async ({ page, limit, search, isFeatured, tags }: { page: num
                phone: true
             }
          }
-      },
-      orderBy: {
-         createdAt: "desc"
-      }
+      }      
    })
-   return result
+   return result   
 }
 
 // get post by id
@@ -67,20 +54,20 @@ const GetSinglePost = async (id: number) => {
    })
 
    return result
-
+   
 }
 
 // upate post by id
-const UpdatePostById = async (id: number, payload: Partial<Post>) => {
+const UpdatePostById = async (id:number, payload:Partial<Post>) => {
    const result = await prisma.post.update({
       where: {
          id
-      },
+      }, 
       data: payload
    })
 
    return result;
-
+   
 }
 
 //DeletePostById
@@ -94,9 +81,9 @@ const DeletePostById = async (id: number) => {
 }
 
 export const PostServices = {
-   CreatePost,
-   GetAllPost,
-   GetSinglePost,
-   UpdatePostById,
-   DeletePostById
+    CreatePost,
+     GetAllPost,
+     GetSinglePost,
+     UpdatePostById,
+     DeletePostById
 }
