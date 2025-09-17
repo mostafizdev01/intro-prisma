@@ -15,6 +15,5 @@ const AuthWithGoogle = async (req: Request, res: Response) => {
 }
 
 export const AuthControllers = {
-    UserLogin,
-    AuthWithGoogle
+    UserLogin
 }

@@ -90,6 +90,7 @@ const deleteDataById = async (id:number) => {
     return result;
 }
 
+// post blog states
 
 export const UserServices = {
     CreateUser,

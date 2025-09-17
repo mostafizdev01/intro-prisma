@@ -140,16 +140,16 @@ const getBlogStat = async () => {
       })
 
       const lastWeek = new Date();
-      lastWeek.setDate(lastWeek.getDate() - 7) /// get 7 days ago day
+      lastWeek.setDate(lastWeek.getDate() - 7)
 
-      const lastWeekPostCount = await tx.post.count({ /// get last 7 days ago post count
+      const lastWeekPostCount = await tx.post.count({
          where: {
             createdAt: {
                gte: lastWeek
             }
          }
       })
-      return { // return data on object formate
+      return {
          stats: {
             totalPosts: aggregates._count ?? 0,
             totalView: aggregates._sum.views ?? 0,

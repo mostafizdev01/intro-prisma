@@ -90,6 +90,18 @@ const deleteDataById = async (id:number) => {
     return result;
 }
 
+// post blog states
+const getBlogStat = async () => {
+    return await prisma.$transaction(async (tx)=> {
+        const aggregates = await tx.post.aggregate({
+            _count: true,
+            _sum: {views: true},
+            _avg: {views: true},
+            _max: {views: true},
+            _min: {views: true}
+        })
+    })
+}
 
 export const UserServices = {
     CreateUser,

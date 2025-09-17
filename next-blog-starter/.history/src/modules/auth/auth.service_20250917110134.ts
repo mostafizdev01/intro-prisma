@@ -31,12 +31,7 @@ const AuthWithGoogle = async(payload: Prisma.UserCreateInput)=> {
          data:payload
       })
    }
-
-   return isUserExist;
 }
-
-
 export const AuthServices = {
-    UserLogin,
-    AuthWithGoogle
+    UserLogin
 }

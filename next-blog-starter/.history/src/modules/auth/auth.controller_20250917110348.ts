@@ -9,12 +9,12 @@ const UserLogin = async (req: Request, res: Response) => {
 
 
 // authWithGoogle
-const AuthWithGoogle = async (req: Request, res: Response) => {
+const AuthWithGoogle = async (req:Request, res:Response) => {
     const result = await AuthServices.AuthWithGoogle(req.body)
-    return result;
+
+    return isUserExist;
 }
 
 export const AuthControllers = {
-    UserLogin,
-    AuthWithGoogle
+    UserLogin
 }

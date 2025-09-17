@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { prisma } from "../../config/db";
 
 
@@ -20,23 +19,6 @@ const UserLogin = async (payload: any) => {
      return isUserExist
 }
 
-// authWithGoogle
-const AuthWithGoogle = async(payload: Prisma.UserCreateInput)=> {
-   let isUserExist = await prisma.user.findUnique({
-      where: {email:payload.email}
-   })
-
-   if(!isUserExist){
-     isUserExist = await prisma.user.create({
-         data:payload
-      })
-   }
-
-   return isUserExist;
-}
-
-
 export const AuthServices = {
-    UserLogin,
-    AuthWithGoogle
+    UserLogin
 }

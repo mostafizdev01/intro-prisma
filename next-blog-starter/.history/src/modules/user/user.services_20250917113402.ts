@@ -90,6 +90,53 @@ const deleteDataById = async (id:number) => {
     return result;
 }
 
+// post blog states
+const getBlogStat = async () => {
+    return await prisma.$transaction(async (tx)=> {
+        const aggregates = await tx.post.aggregate({
+            _count: true,
+            _sum: {views: true},
+            _avg: {views: true},
+            _max: {views: true},
+            _min: {views: true}
+        })
+
+        const featuredCount = await tx.post.count({
+            where: {isFeatured: true}
+        })
+
+        const topFeaturedCount = await tx.post.findFirst({
+            where: {isFeatured: true},
+            orderBy: {createdAt: "desc"}
+        })
+
+        const lastWeek = new Date();
+        lastWeek.setDate(lastWeek.getDate() - 7)
+
+        const lastWeekPostCount = await tx.post.count({
+            where: {
+                createdAt: {
+                    gte: lastWeek
+                }
+            } 
+        })
+        return {
+            stats: {
+                totalPosts: aggregates._count ?? 0,
+                totalView: aggregates._sum.views ?? 0,
+                avgViews: aggregates._avg.views ?? 0,
+                maxViews: aggregates._max.views ?? 0,
+                minViews: aggregates._min.views ?? 0
+            },
+            featured: {
+                count: featuredCount,
+                topPost: topFeaturedCount
+            },
+            lastWeekPostCount
+        }
+    })
+
+}
 
 export const UserServices = {
     CreateUser,

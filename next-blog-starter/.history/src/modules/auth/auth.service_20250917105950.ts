@@ -22,21 +22,10 @@ const UserLogin = async (payload: any) => {
 
 // authWithGoogle
 const AuthWithGoogle = async(payload: Prisma.UserCreateInput)=> {
-   let isUserExist = await prisma.user.findUnique({
+   const isUserExist = await prisma.user.findUnique({
       where: {email:payload.email}
    })
-
-   if(!isUserExist){
-     isUserExist = await prisma.user.create({
-         data:payload
-      })
-   }
-
-   return isUserExist;
 }
-
-
 export const AuthServices = {
-    UserLogin,
-    AuthWithGoogle
+    UserLogin
 }

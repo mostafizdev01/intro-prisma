@@ -149,7 +149,7 @@ const getBlogStat = async () => {
             }
          }
       })
-      return { // return data on object formate
+      return {
          stats: {
             totalPosts: aggregates._count ?? 0,
             totalView: aggregates._sum.views ?? 0,

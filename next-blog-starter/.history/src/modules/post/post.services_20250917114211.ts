@@ -121,8 +121,9 @@ const DeletePostById = async (id: number) => {
 
 // post blog states
 const getBlogStat = async () => {
-   return await prisma.$transaction(async (tx) => { // create transaction rollback. rollback name => tx
-      const aggregates = await tx.post.aggregate({ /// get post aggregate
+   console.log("stats is calling...")
+   return await prisma.$transaction(async (tx) => {
+      const aggregates = await tx.post.aggregate({
          _count: true,
          _sum: { views: true },
          _avg: { views: true },
@@ -130,26 +131,26 @@ const getBlogStat = async () => {
          _min: { views: true }
       })
 
-      const featuredCount = await tx.post.count({ /// j sob post er isFeatured true ase tader count ber korbe
+      const featuredCount = await tx.post.count({
          where: { isFeatured: true }
       })
 
-      const topFeaturedCount = await tx.post.findFirst({ // isFeature true && view count top tader ekta k dekhabe
+      const topFeaturedCount = await tx.post.findFirst({
          where: { isFeatured: true },
          orderBy: { createdAt: "desc" }
       })
 
       const lastWeek = new Date();
-      lastWeek.setDate(lastWeek.getDate() - 7) /// get 7 days ago day
+      lastWeek.setDate(lastWeek.getDate() - 7)
 
-      const lastWeekPostCount = await tx.post.count({ /// get last 7 days ago post count
+      const lastWeekPostCount = await tx.post.count({
          where: {
             createdAt: {
                gte: lastWeek
             }
          }
       })
-      return { // return data on object formate
+      return {
          stats: {
             totalPosts: aggregates._count ?? 0,
             totalView: aggregates._sum.views ?? 0,

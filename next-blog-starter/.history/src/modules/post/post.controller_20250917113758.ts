@@ -94,6 +94,5 @@ export const PostControllers = {
     GetAllPost,
     GetPostById,
     UpdatePostById,
-    DeletePostById,
-    getBlogStat
+    DeletePostById
 }

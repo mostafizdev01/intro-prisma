@@ -85,7 +85,7 @@ const getBlogStat = async (req:Request, res: Response)=> {
         const result = await PostServices.getBlogStat();
         res.status(200).json({result})
     } catch (error) {
-        console.log(error)
+        
     }
 }
 
@@ -94,6 +94,5 @@ export const PostControllers = {
     GetAllPost,
     GetPostById,
     UpdatePostById,
-    DeletePostById,
-    getBlogStat
+    DeletePostById
 }
